@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Loan Interest Calculator</title>
+        <style>
+            button {
+                width: 300px;
+                height: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <button onclick="calculateLoan(LoanType.Simple, 0, 30, 0)">Calculate Simple Loan</button>
+        <button onclick="calculateLoan(LoanType.Compound, 0, 50, 0, 0)">Calculate Compound Loan</button>
+
+        <script>
+            // enumeration object with constant loan types for the selection of corresponding calculation function to avoid duplication
+            const LoanType = {
+                Simple: "simple",
+                Compound: "compound",
+            }
+
+            // main public function to calculate both loans 
+            function calculateLoan(loanType, initialLoanAmount, annualRateInPercents, periodInYears, timesOfCompound = null) {
+                console.log("Starting new calculation.");
+
+                // a call of validation function that returns boolean value (false - error, true - validation succeeded)
+                const validationResult = validateInputData(loanType, initialLoanAmount, annualRateInPercents, periodInYears, timesOfCompound);
+                if(!validationResult) {
+                    console.log("Validation Error. Try Again.");
+                    return;
+                }
+
+                // switch case statement that identifies a private function to be called based on the loan type
+                let result = null;
+                switch (loanType) {
+                    case LoanType.Simple: 
+                        result = calculateSimpleLoan(initialLoanAmount, annualRateInPercents, periodInYears);
+                        break;
+                    case LoanType.Compound: 
+                        result = calculateCompoundLoan(initialLoanAmount, annualRateInPercents, periodInYears, timesOfCompound);
+                        break;
+                    default:
+                        break;
+                }
+
+                console.log(`The future value of ${loanType} loan is ${result.toFixed(2)}`);
+            }
+
+            // a private function to calculate simple loan
+            function calculateSimpleLoan(initialLoanAmount, annualRateInPercents, periodInYears) {
+                return initialLoanAmount + (initialLoanAmount * (annualRateInPercents / 100) * periodInYears);
+            }
+
+            // a private function to calculate compound loan
+            function calculateCompoundLoan(initialLoanAmount, annualRateInPercents, periodInYears, timesOfCompound) {
+                return initialLoanAmount * Math.pow(1 + (annualRateInPercents / 100) / timesOfCompound, timesOfCompound * periodInYears);
+            }
+
+
+            // validation function for input parameters 
+            function validateInputData(loanType, initialLoanAmount, annualRateInPercent, periodInYears, timesOfCompound) {
+                let result = true;
+
+                // check if the loan type is either simple or compound, otherwise error
+                if (loanType !== LoanType.Simple && loanType !== LoanType.Compound) {
+                    console.log("Type of loan is unknown");
+                    result = false;
+                }
+
+                // check if the initial loan amount is positive 
+                if (!initialLoanAmount || initialLoanAmount <= 0) {
+                    console.log("Initial Loan Amount is incorrect");
+                    result = false;
+                }
+
+                // check if the annual rate percentage is positive 
+                if (!annualRateInPercent || annualRateInPercent <= 0) {
+                    console.log("Annual Rate In Percent is incorrect");
+                    result = false;
+                }
+
+                // check if the period in years is positive
+                if (!periodInYears || periodInYears <= 0) {
+                    console.log("Period in Years is incorrect");
+                    result = false;
+                }
+
+                // check if the number of times that interest is compounded per time period is greater than zero
+                if (loanType === LoanType.Compound && (!timesOfCompound || timesOfCompound < 0)) {
+                    console.log("Times Of Compound is incorrect");
+                    result = false;
+                }
+
+                return result;
+            }
+
+        </script>
+    </body>
+</html>
