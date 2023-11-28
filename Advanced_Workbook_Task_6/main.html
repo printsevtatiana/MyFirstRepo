@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Order Form</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <div class="order-form-main-container container">
+            <div class="order-form-container container">
+                <h3>Order Form</h3>
+                <form action="" method="post" id="orderform"> 
+                    <label for="first-name">First Name *</label><br/>
+                    <input name="first-name" type="text" placeholder="Your First Name" required/><br/>
+                    <label for="last-name">Last Name *</label><br/>
+                    <input name="last-name" type="text" placeholder="Your Last Name" required/><br/>
+                    <label for="email">Email *</label><br/>
+                    <input name="email" type="text" placeholder="Your Email" required/><br/>
+                    <label for="phone-number">Phone Number</label><br/>
+                    <input name="phone-number" type="text" placeholder="Your Phone Number"/><br/>
+                    <label for="computer-component">Component *</label><br/>
+                    <select name="computer-component" required onchange="changeComputerComponent()">
+                        <option value="" disabled selected>Select Component</option>
+                        <option value="processor">Processor</option>
+                        <option value="ram">RAM</option>
+                        <option value="audio-card">Audio Card</option>
+                        <option value="graphic-card">Graphic Card</option>
+                    </select><br/>
+                    <label for="component-name">Component Name *</label><br/>
+                    <input id="componentname" name="component-name" type="text" placeholder="Component Name" required disabled/><br/>
+                    <input type="submit" value="Create Form"/>
+                </form>
+            </div>
+                    
+            <div class="result-table-container container">
+                <h3>Orders</h3>
+                <table id="resulttable"> 
+                    <thead>
+                        <tr>
+                            <th>First Name</th> 
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Component</th>
+                            <th>Component Name</th>
+                            <th>Order Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script src="main.js"></script>
+    </body>
+</html>

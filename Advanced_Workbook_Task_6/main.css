@@ -1,0 +1,56 @@
+h3 {
+    text-align: center;
+    font-size: 20px;
+}
+
+.order-form-main-container {
+    display: flex;
+    margin: auto;
+    padding-top: 50px;
+    max-width: 1200px;
+}
+
+.order-form-main-container > .order-form-container {
+    flex: 1;
+    max-width: 300px;
+    min-width: 300px;
+}
+
+.order-form-main-container > .result-table-container {
+    flex: 2;
+}
+
+#orderform > input, #orderform > select {
+    width: 100%;
+    height: 40px;
+}
+
+#orderform > label {
+    padding-top: 10px;
+}
+
+#orderform > input[type = submit] {
+    margin-top: 20px;
+}
+
+.order-form-main-container >.result-table-container {
+    padding-left: 30px;
+}
+
+#resulttable {
+    width: 100%;
+}
+
+#resulttable thead {
+    font-size: 12px;
+}
+
+#resulttable tbody {
+    font-size: 14px;
+}
+
+#resulttable td, #resulttable th {
+    padding: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+}
